@@ -78,4 +78,3 @@ D:\IP\InstantImpact\InstantImpact\bin\Debug\Zlib.Portable.xml
 D:\IP\InstantImpact\InstantImpact\obj\Debug\InstantImpact.csproj.CoreCompileInputs.cache
 D:\IP\InstantImpact\InstantImpact\obj\Debug\InstantImpact.dll
 D:\IP\InstantImpact\InstantImpact\obj\Debug\InstantImpact.pdb
-D:\IP\InstantImpact\InstantImpact\obj\Debug\InstantImpact.csprojResolveAssemblyReference.cache
