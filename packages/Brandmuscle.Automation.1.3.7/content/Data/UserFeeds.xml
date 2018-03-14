@@ -1,0 +1,12 @@
+﻿<BackendData>
+  <UserFeed>
+    <StagingTables>
+      <PMA>PMA_Users</PMA>
+      <Progressive>ProgressiveStagingTable</Progressive>
+    </StagingTables>
+    <StoredProcedures>
+      <PMA>PMALoadUserFeed</PMA>
+      <Progressive>ProgressiveLoadUserFeed</Progressive>
+    </StoredProcedures>
+  </UserFeed>
+</BackendData>

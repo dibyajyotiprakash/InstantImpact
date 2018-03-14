@@ -1,0 +1,22 @@
+﻿<AtlasSiteData>
+  <Environment>
+    <AtlasProject>ProductionDirecTV</AtlasProject>
+  </Environment>
+  <Credentials>
+    <ProductionDirecTV>
+      <adminUrl>https://directvmarketingcenter.brandmuscle.net/Login/Login.aspx</adminUrl>
+      <adminUser>AtlasDTVAdmin</adminUser>
+      <adminPassword>directv</adminPassword>
+    </ProductionDirecTV>
+    <QADirecTV>
+      <adminUrl>http://directvmarketingcenter.v5qa.brandmuscle.local/Login/Login.aspx</adminUrl>
+      <adminUser>AtlasDTVAdmin</adminUser>
+      <adminPassword>directv</adminPassword>
+    </QADirecTV>
+    <StageDirecTV>
+      <adminUrl>http://directvmarketingcenter.v5stage.brandmuscle.net/Login/Login.aspx</adminUrl>
+      <adminUser>AtlasDTVAdmin</adminUser>
+      <adminPassword>directv</adminPassword>
+    </StageDirecTV>
+  </Credentials>
+</AtlasSiteData>

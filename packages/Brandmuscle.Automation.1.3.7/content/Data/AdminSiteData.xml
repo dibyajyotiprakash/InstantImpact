@@ -1,0 +1,27 @@
+﻿<AdminSiteData>
+  <Environment>
+    <V5Project>ProductionQAAutomation</V5Project>
+    <AtlasProject>QA</AtlasProject>
+    <MeowMeowProject>STAGE</MeowMeowProject>
+  </Environment>
+  <Credentials>
+    <ProductionQAAutomation>
+      <adminUrl>http://admintool.brandmuscle.net/</adminUrl>
+      <adminUser>mdutta@brandmuscle.com</adminUser>
+      <adminPassword>Password1</adminPassword>
+    </ProductionQAAutomation>
+    <QAQAAutomation>
+      <adminUrl>http://admintool.v5qa.brandmuscle.local/</adminUrl>
+      <adminUser>mdutta@brandmuscle.com</adminUser>
+      <adminPassword>Password1</adminPassword>
+    </QAQAAutomation>
+    <StageQAAutomation>
+      <adminUrl>https://admintool.v5stage.brandmuscle.net/</adminUrl>
+      <adminUser>mdutta@brandmuscle.com</adminUser>
+      <adminPassword>Password1</adminPassword>
+    </StageQAAutomation>
+    
+
+
+  </Credentials>
+</AdminSiteData>
