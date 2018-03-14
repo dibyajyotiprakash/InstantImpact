@@ -20,8 +20,12 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         public static By MyProject
         { get { return (By.Id("MyProjectsHeader")); } }
 
+<<<<<<< HEAD
         //Comments..
 
+=======
+//Comment
+>>>>>>> a6b1012651b0a4aff36bd67d11f77a1fe66c53c3
         public static By SelectAll
         { get { return (By.Id("Body_btnSelectAll")); } }
 
