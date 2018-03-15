@@ -118,20 +118,13 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = extent.CreateTest("VerifyPreviewChanges");
             try
             {
-                if (!SaveDesign.IsElementEnabled())
-                {
+                    Wait.WaitVisible(PreviewChanges, 10);
                     PreviewChanges.Click();
-                    Get.Windowhandle();
                     Wait.WaitVisible(PreviewImage, 30);
                     bool status_of_previewimage = PreviewImage.IsElementDisplayed();
                     logger.Info("Status of Preview Image is " + status_of_previewimage);
                     Console.WriteLine("Status of Preview Image is " + status_of_previewimage);
-                }
-                else
-                {
-                    Console.WriteLine("Preview changes failed.");
-                    logger.Info("Preview changes failed.");
-                }
+                    Wait.WaitVisible(SaveDesign,30);
             }
             catch (Exception e)
             {
@@ -151,6 +144,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = extent.CreateTest("VerifyViewProof");
             try
             {
+                PreviewChanges.Click();
+                Wait.WaitVisible(ViewProof,20);
+                Wait.WaitTime(20);
                 ViewProof.Click();
                 Get.Windowhandle();
                 Wait.WaitVisible(PreviewChanges, 30);
@@ -193,8 +189,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = extent.CreateTest("VerifyViewProof");
             try
             {
-                if (SaveDesign.IsElementEnabled())
-                {
+                    Wait.WaitVisible(SaveDesign,20);
                     SaveDesign.Click();
                     Wait.WaitVisible(SaveDeisgnPopup, 20);
                     string designnanme = name + DateTime.Now.ToString();
@@ -205,12 +200,8 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
                     String msg = SaveDesignNameConfirmMsg.GetText();
                     Console.WriteLine("Confirmation msg after successfully saving the design name " + msg);
                     logger.Info("Confirmation msg after successfully saving the design name " + msg);
-                }
-                else
-                {
-                    Console.WriteLine("Verify Save Deisgn name failed.");
-                    logger.Info("Verify Save Deisgn name failed.");
-                }
+                
+    
             }
             catch (Exception e)
             {

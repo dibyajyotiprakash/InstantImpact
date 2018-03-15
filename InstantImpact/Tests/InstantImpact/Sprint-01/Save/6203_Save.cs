@@ -34,7 +34,7 @@ namespace InstantImpact.Tests.InstantImpact.Save
                 CreateDesignPage.VerifyCreateDesignPage();
                 CreateDesignPage.VerifyPreviewChanges();
                 CreateDesignPage.ClickOnPreviewChange();
-                Wait.WaitTime(10);
+                Wait.WaitTime(50);
                 CreateDesignPage.VerifySaveDesign("template1");
                 test.Pass("_6203_Save passed");
                 Driver.Quit();

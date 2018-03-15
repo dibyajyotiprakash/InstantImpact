@@ -34,6 +34,7 @@ namespace InstantImpact.Tests.InstantImpact.Edit
                 CreateDesignPage.VerifyCreateDesignPage();
                 Wait.WaitTime(20);
                 CreateDesignPage.VerifyPreviewChanges();
+                Wait.WaitTime(20);
                 CreateDesignPage.VerifyViewProof();
                 test.Pass("_6205_Edit" + "passed");
                 Driver.Quit();
