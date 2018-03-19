@@ -17,21 +17,35 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
     public class MyProjectsPage : Base
     {
         public static ExtentTest test;
-        public static By MyProject
-        { get { return (By.Id("MyProjectsHeader")); } }
+        public static By ProjectsHeader
+        { get { return (By.XPath("//*[@class='row no-gutters standardHeader']")); } }
 
+        public static By MyProject
+        { get { return (By.XPath("//*[@href='/Account/MyProjectsPage.aspx']")); } }
+
+        public static By SearchButton
+        { get { return (By.XPath("//*[@name='ctl00$Body$btnSearch']")); } }
+
+        public static By NextPage
+        { get { return (By.XPath("//*[@value=' '][3]")); } }
+
+        public static By SearchBox
+        { get { return (By.XPath("//*[@id='Body_TxtSearch']")); } }
 
         public static By SelectAll
-        { get { return (By.Id("Body_btnSelectAll")); } }
+        { get { return (By.XPath("//*[contains(text(),'Select All')]")); } }
 
         public static By SelectNone
-        { get { return (By.Id("Body_btnSelectNone")); } }
+        { get { return (By.XPath("//*[contains(text(),'Select None')]")); } }
 
         public static By DeleteSelected
         { get { return (By.Id("Body_btnDeleteSelected")); } }
 
+        public static By WithoutSelectDeleteAlert
+        { get { return (By.XPath("//*[contains(text(),'Please select at least one')]")); } }
+
         public static By SortByDesignName
-        { get { return (By.XPath("//*[@class='t-font-icon rgIcon rgSortAscIcon']")); } }
+        { get { return (By.XPath("//*[@class='rgHeader'][4]/a")); } }
 
         public static By SortByTemplateId
         { get { return (By.XPath("//*[@class='t-font-icon rgIcon rgSortAscIcon']")); } }
@@ -58,22 +72,19 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         { get { return (By.XPath("//tbody/tr[1]/td[9]/div[3]/a[1]")); } }
 
         public static By DeleteAlertPopup
-        { get { return (By.XPath("//*[@class='rwContent rwExternalContent']")); } }
+        { get { return (By.XPath("//*[contains(@id,'confirm1521')]")); } }
 
         public static By DeleteAlertPopupMsg
-        { get { return (By.XPath("//*[text()=' Are you sure you want to Delete?']")); } }
+        { get { return (By.XPath("//*[contains(text(),'Are you sure you want to delete')]")); } }
 
         public static By DeleteAlertPopupYes
-        { get { return (By.XPath("//*[@class='rwOkBtn'][1]")); } }
+        { get { return (By.XPath("//*[@class='boxes'][1]/a[1]")); } }
 
         public static By DeleteAlertPopupNo
-        { get { return (By.XPath("//*[@class='rwDialogButtons']/button[2]")); } }
+        { get { return (By.XPath("//*[@class='boxes'][1]/a[2]")); } }
 
         public static By ConfirmationMsgPopup
-        { get { return (By.XPath("//*[contains(@id,'RadWindowWrapper_alert')]")); } }
-
-        public static By ConfirmationPopupOk
-        { get { return (By.XPath("//*[@class='rwDialogButtons'][1]")); } }
+        { get { return (By.XPath("//*[@id='ctl00_Body_ucMB_ucRadNotification_C_radNotifyTextWrapper']")); } }
 
         public static By SecondCheckBox
         { get { return (By.XPath("//tbody/tr[2]/td[1]")); } }
@@ -90,31 +101,31 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         public static By TemplateIdColumn
         { get { return (By.XPath("//*[@class='rgHeader'][5]")); } }
 
-        public static void VerifyHomePage()
+        public static void VerifyProjectsPage()
         {
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
             try
             {
                 //Check the visiblity of My Project Header
-                Wait.WaitVisible(MyProject, 60);
-                bool status_of_myprojectheader = MyProject.IsElementDisplayed();
+                Wait.WaitVisible(ProjectsHeader, 60);
+                bool status_of_myprojectheader = ProjectsHeader.IsElementDisplayed();
                 Console.WriteLine("Status of logo is " + status_of_myprojectheader);
 
                 //Check the status of SelectAll
                 Wait.WaitVisible(SelectAll, 60);
-                bool status_of_selecteall = MyProject.IsElementEnabled();
+                bool status_of_selecteall = ProjectsHeader.IsElementEnabled();
                 Console.WriteLine("Status of SelectAll is " + status_of_selecteall);
 
                 //Check the status of SelectNone
                 Wait.WaitVisible(SelectNone, 60);
-                bool status_of_selectnone = MyProject.IsElementEnabled();
+                bool status_of_selectnone = ProjectsHeader.IsElementEnabled();
                 Console.WriteLine("Status of SelectNone is " + status_of_selectnone);
 
                 //Check the status of DeleteSelected
                 Wait.WaitVisible(DeleteSelected, 60);
                 bool status_of_deleteselected = DeleteSelected.IsElementEnabled();
-                Console.WriteLine("Status of SelectNone is " + status_of_deleteselected);
+                Console.WriteLine("Status of DeleteSelected is " + status_of_deleteselected);
             }
             catch (Exception e)
             {
@@ -124,39 +135,8 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 throw e;
             }
         }
-        //Verify Maximum tempalet present in a page 
-        public static void VerifyTotalTempalteInaPage()
-        {
-            log4net.Config.XmlConfigurator.Configure();
-            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
-            try
-            {
-                IList<IWebElement> pages = Driver.FindElements(By.XPath("//div[@class='rgCurrentPage']/a"));
-                for (int i = 0; i < pages.Count; i++)
-                {
-                    pages[i].Click();
-                    IList<IWebElement> templatelist = Driver.FindElements(By.XPath("//tbody/tr"));
-                    int total_template_ina_page = templatelist.Count();
-                    int max_size = 10;
-                    if (total_template_ina_page <= max_size)
-                    {
-                        Console.WriteLine("Maximum number of templates present in a page meets requirement: 10");
-                    }
-                    else
-                    {
-                        logger.Error("Maximum number of templates present in a page does not meet requirement: 10");
-                    }
-                }
 
-            }
-            catch (Exception e)
-            {
-                logger.Error("Maximum number of template in My Projects Page failed due to : " + e);
-                //**Closing browser
-                Driver.Quit();
-                throw e;
-            }
-        }
+        //Delete Single Template
         public static void DeleteSingleTemplate()
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -170,12 +150,11 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 if (DeleteAlertPopup.IsElementDisplayed())
                 {
                     Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
-                    Wait.WaitVisible(DeleteAlertPopupYes, 10);
+                    Wait.WaitVisible(DeleteAlertPopupYes,10);
+                    Wait.WaitTime(10);
                     DeleteAlertPopupYes.Click();
-                    Wait.WaitVisible(ConfirmationMsgPopup, 10);
+                    Wait.WaitVisible(ConfirmationMsgPopup,10);
                     Console.WriteLine("Confirmation message is " + ConfirmationMsgPopup.GetText());
-                    Wait.WaitVisible(ConfirmationPopupOk, 10);
-                    ConfirmationPopupOk.Click();
                     Wait.WaitTime(10);
                 }
                 else
@@ -192,6 +171,8 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
 
         }
+
+        //Delete Multiple Templates
         public static void DeleteMultipleTemplates()
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -201,8 +182,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 FirstCheckBox.Click();
                 SecondCheckBox.Click();
                 DeleteSelected.Click();
-                bool status_of_deletealertpopup = DeleteAlertPopup.IsElementDisplayed();
-                if (status_of_deletealertpopup)
+                Wait.WaitVisible(DeleteAlertPopup, 10);
+                Wait.WaitTime(10);
+                if (DeleteAlertPopup.IsElementDisplayed())
                 {
                     Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                     DeleteAlertPopupYes.Click();
@@ -212,7 +194,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                     Console.Write("Delete alert pop-up is not comming ");
                 }
                 Console.WriteLine("Confirmation message is " + ConfirmationMsgPopup.GetText());
-                ConfirmationPopupOk.Click();
                 Wait.WaitTime(10);
             }
             catch (Exception e)
@@ -224,6 +205,8 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
 
         }
+
+        //Delete All Templates
         public static void DeleteAllTemplates()
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -243,7 +226,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                     Console.Write("Delete alert pop-up is not comming ");
                 }
                 Console.WriteLine("Confirmation message is " + ConfirmationMsgPopup.GetText());
-                ConfirmationPopupOk.Click();
                 Wait.WaitTime(10);
             }
             catch (Exception e)
@@ -255,6 +237,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
 
         }
+
         //Click on Edit Button.
         public static void ClickOnEdit()
         {
@@ -316,6 +299,29 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
         }
 
+        //Click on DeleteSelected without Clicking on Checkbox
+        public static void ClickDeleteSelectWithoutCheck()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("DismissPopupSingleTemplate");
+            try
+            {
+                DeleteSelected.Click();
+                Wait.WaitVisible(WithoutSelectDeleteAlert, 20);
+                string msg=WithoutSelectDeleteAlert.GetText();
+                Console.WriteLine("Message after click on DeleteSelected without selcting check box is " + msg);
+                Wait.WaitTime(10);
+            }
+            catch(Exception e)
+            {
+                logger.Error("Click Delete Select Without Check failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+        
         //Negative Cases For Delete
         public static void DismissPopupSingleTemplate()
         {
@@ -324,13 +330,14 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             test = Base.extent.CreateTest("DismissPopupSingleTemplate");
             try
             {
+               
                 FirstCheckBox.Click();
                 FirstDelete.Click();
                 Wait.WaitVisible(DeleteAlertPopup, 10);
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
                 Wait.WaitTime(10);
-                if (MyProject.IsElementDisplayed())
+                if (ProjectsHeader.IsElementDisplayed())
                 {
                     Console.Write("Delete alert popup is successfully dismissed.");
                 }
@@ -348,7 +355,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 throw e;
             }
         }
-
         public static void DismissPopupMultipleTemplate()
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -364,7 +370,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
                 Wait.WaitTime(10);
-                if (MyProject.IsElementDisplayed())
+                if (ProjectsHeader.IsElementDisplayed())
                 {
                     Console.Write("Delete alert popup is successfully dismissed.");
                 }
@@ -396,7 +402,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
                 Wait.WaitTime(10);
-                if (MyProject.IsElementDisplayed())
+                if (ProjectsHeader.IsElementDisplayed())
                 {
                     Console.Write("Delete alert popup is successfully dismissed.");
                 }
@@ -429,31 +435,104 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Wait.WaitTime(5);
                 String rowcolor_after = Driver.FindElement(By.XPath("//tbody/tr[1]/td[1]")).GetCssValue("background-color");
                 Console.WriteLine("Color of row after selecting any template is " + rowcolor_after);
+                FirstCheckBox.Click();
 
-                //var p = rowcolor_after.Split(new char[] { ',', ']' });
-
-                //int A = Convert.ToInt32(p[0].Substring(p[0].IndexOf('=') + 1));
-                //int R = Convert.ToInt32(p[1].Substring(p[1].IndexOf('=') + 1));
-                //int G = Convert.ToInt32(p[2].Substring(p[2].IndexOf('=') + 1));
-                //int B = Convert.ToInt32(p[3].Substring(p[3].IndexOf('=') + 1));
-
-                Color color = Color.FromArgb(105,105,105,1);
-                int IColor;
-                String color_name;
-                //from color to string    
-                IColor = ColorTranslator.ToWin32(color);
-                color_name = IColor.ToString();
-                //from string to color    
-                IColor = int.Parse(color_name);
-                color = ColorTranslator.FromWin32(IColor);
-
-                Console.WriteLine("Color is " + color);
             }
             catch (Exception e)
             {
                 test.Fail("Get color of row failed" + e);
+                Driver.Quit();
+                throw e;
             }
+        }
 
+        //Verify List of templates in Projects page
+        public static void VerifyListOfTemplates()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("VerifyListOfTemplates");
+            try
+            {
+                IList<IWebElement> templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                Console.WriteLine("Number of templates present in a page is " + templates.Count);
+                for (int i = 0; i < templates.Count; i++)
+                {
+                    Console.WriteLine("Design name is " + templates[i].Text);                    
+                }
+            }
+            catch (Exception e)
+            {
+                test.Fail("Verify List of template failed" + e);
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Filter By Design name
+        public static void FilterByDeisgnName()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("VerifyListOfTemplates");
+            try
+            {
+                IList<IWebElement> templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                Console.WriteLine("Number of templates present in a page is " + templates.Count());
+                for (int i = 0; i < templates.Count; i++)
+                {
+                    SearchBox.Type(templates[i].Text);
+                    Wait.WaitTime(5);
+                    SearchButton.Click();
+                    Wait.WaitTime(5);
+                    SearchBox.Type(Keys.Control + "a");
+                    SearchBox.Type(Keys.Clear);
+                    MyProject.Click();
+                    if (i==0)
+                    {
+                        break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                test.Fail("Filter by deisgn name failed" + e);
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Verify Sorting By Design name
+        public static void VerifySortByDesignName()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("VerifySortByDesignName");
+            try
+            {
+                //Before click on Sort by Design name
+                IList<IWebElement> before_templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                Console.WriteLine("Design names before sorting..");
+                foreach(IWebElement beforeclick in before_templates)
+                {
+                    Console.WriteLine(beforeclick.Text);
+                }
+                SortByDesignName.Click();
+                Wait.WaitTime(20);
+                //After click on Sort by Design name
+                Console.WriteLine("Design names after sorting..");
+                IList<IWebElement> after_templates = Driver.FindElements(By.XPath("//*[@class='rgSorted']"));
+                foreach (IWebElement afterclick in after_templates)
+                {
+                    Console.WriteLine(afterclick.Text);
+                }
+            }
+            catch (Exception e)
+            {
+                test.Fail("Verify List of Verify Soft by deisgn name failed" + e);
+                Driver.Quit();
+                throw e;
+            }
         }
     }
 }

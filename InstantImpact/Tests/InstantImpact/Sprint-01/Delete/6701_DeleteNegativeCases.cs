@@ -27,6 +27,7 @@ namespace InstantImpact.Tests.InstantImpact.Delete
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
+                MyProjectsPage.ClickDeleteSelectWithoutCheck();
                 MyProjectsPage.DismissPopupSingleTemplate();
                 MyProjectsPage.DismissPopupMultipleTemplate();
                 MyProjectsPage.DismissPopupAllTemplate();

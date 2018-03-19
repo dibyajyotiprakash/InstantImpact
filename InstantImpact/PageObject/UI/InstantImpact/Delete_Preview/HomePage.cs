@@ -40,12 +40,12 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 //Check Your Account Button
                 Wait.WaitVisible(YourAccount,20);
                 bool status_of_myaacount = YourAccount.IsElementEnabled();
-                Console.WriteLine("Status of your account button is " + status_of_myaacount);
+                Console.WriteLine("Status of account button is " + status_of_myaacount);
 
                 //Check My Project Button
                 Wait.WaitVisible(MyProject,20);
                 bool status_of_myproject = YourAccount.IsElementEnabled();
-                Console.WriteLine("Status of my project button is " + status_of_myproject);
+                Console.WriteLine("Status of projects button is " + status_of_myproject);
 
                 //Click on My Project Button
                 MyProject.Click();

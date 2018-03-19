@@ -29,7 +29,7 @@ namespace InstantImpact.Tests.InstantImpact
                 LoginPage.LoginToApplication("diageoadmin@centiv.com","go2web");
                 Wait.WaitTime(5);
                 HomePage.VerifyHomePage();
-                MyProjectsPage.VerifyHomePage();
+                MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.DeleteMultipleTemplates();
                 test.Pass("_6275_MultipleDelete" + "passed");
                 Driver.Quit();

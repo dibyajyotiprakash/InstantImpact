@@ -24,8 +24,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
     { get { return (By.Id("btnLogin")); } }
 
     public  static void LoginToApplication(string email,string pwd)
-    {
-         
+    {       
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(LoginPage));
             try

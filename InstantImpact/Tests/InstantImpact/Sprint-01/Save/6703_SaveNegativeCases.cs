@@ -29,14 +29,15 @@ namespace InstantImpact.Tests.InstantImpact.Save
                 Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com","go2web");
                 HomePage.VerifyHomePage();
-                MyProjectsPage.VerifyHomePage();
+                MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.ClickOnEdit();
                 CreateDesignPage.VerifyCreateDesignPage();
                 CreateDesignPage.VerifyPreviewChanges();
                 CreateDesignPage.ClickOnPreviewChange();
-                Wait.WaitTime(10);
+                Wait.WaitTime(40);
                 CreateDesignPage.CancelSaveDesignName("template");
-                Wait.WaitTime(10);
+                Wait.WaitTime(20);
+                CreateDesignPage.VerifyExistingDesignAlertMsg();                
                 test.Pass("_6703_SaveNegativeCases passed");
             }
             catch(Exception e)

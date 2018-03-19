@@ -30,7 +30,7 @@ namespace InstantImpact.Tests.InstantImpact.MyProjects
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
                 HomePage.AccountsToProjects();
-                MyProjectsPage.VerifyHomePage();
+                MyProjectsPage.VerifyProjectsPage();
             }
             catch (Exception e)
             {

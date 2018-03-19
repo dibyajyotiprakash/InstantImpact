@@ -29,7 +29,7 @@ namespace InstantImpact.Tests.InstantImpact.Save
                 Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
-                MyProjectsPage.VerifyHomePage();
+                MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.ClickOnEdit();
                 CreateDesignPage.VerifyCreateDesignPage();
                 CreateDesignPage.VerifyPreviewChanges();

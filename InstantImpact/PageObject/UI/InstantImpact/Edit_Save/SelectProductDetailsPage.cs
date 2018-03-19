@@ -70,8 +70,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.EditButton
                 //**Closing browser
                 Driver.Quit();
             }
-            
-
         }
 
     }

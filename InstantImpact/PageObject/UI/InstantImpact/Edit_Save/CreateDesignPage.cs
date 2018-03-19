@@ -34,6 +34,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
         public static By SaveDesign
         { get { return (By.Id("Body_lnkSaveDesign")); } }
 
+        public static By ExistingDesignNameMsg
+        { get { return (By.XPath("//*[text()='Design name exists, please re-try.']")); } }
+
         public static By ViewProof
         { get { return (By.Id("Body_lnkDownload")); } }
 
@@ -118,13 +121,13 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = extent.CreateTest("VerifyPreviewChanges");
             try
             {
-                    Wait.WaitVisible(PreviewChanges, 10);
-                    PreviewChanges.Click();
-                    Wait.WaitVisible(PreviewImage, 30);
-                    bool status_of_previewimage = PreviewImage.IsElementDisplayed();
-                    logger.Info("Status of Preview Image is " + status_of_previewimage);
-                    Console.WriteLine("Status of Preview Image is " + status_of_previewimage);
-                    Wait.WaitVisible(SaveDesign,30);
+                Wait.WaitVisible(PreviewChanges, 10);
+                PreviewChanges.Click();
+                Wait.WaitVisible(PreviewImage, 30);
+                bool status_of_previewimage = PreviewImage.IsElementDisplayed();
+                logger.Info("Status of Preview Image is " + status_of_previewimage);
+                Console.WriteLine("Status of Preview Image is " + status_of_previewimage);
+                Wait.WaitVisible(SaveDesign, 30);
             }
             catch (Exception e)
             {
@@ -145,7 +148,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             try
             {
                 PreviewChanges.Click();
-                Wait.WaitVisible(ViewProof,20);
+                Wait.WaitVisible(ViewProof, 20);
                 Wait.WaitTime(20);
                 ViewProof.Click();
                 Get.Windowhandle();
@@ -189,19 +192,19 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = extent.CreateTest("VerifyViewProof");
             try
             {
-                    Wait.WaitVisible(SaveDesign,20);
-                    SaveDesign.Click();
-                    Wait.WaitVisible(SaveDeisgnPopup, 20);
-                    string designnanme = name + DateTime.Now.ToString();
-                    SaveDesignName.Type(designnanme);
-                    Wait.WaitTime(10);
-                    SaveDesignNameYes.Click();
-                    Wait.WaitVisible(SaveDesignNameConfirmMsg, 20);
-                    String msg = SaveDesignNameConfirmMsg.GetText();
-                    Console.WriteLine("Confirmation msg after successfully saving the design name " + msg);
-                    logger.Info("Confirmation msg after successfully saving the design name " + msg);
-                
-    
+                Wait.WaitVisible(SaveDesign, 20);
+                SaveDesign.Click();
+                Wait.WaitVisible(SaveDeisgnPopup, 20);
+                string designnanme = name + DateTime.Now.ToString();
+                SaveDesignName.Type(designnanme);
+                Wait.WaitTime(10);
+                SaveDesignNameYes.Click();
+                Wait.WaitVisible(SaveDesignNameConfirmMsg, 20);
+                String msg = SaveDesignNameConfirmMsg.GetText();
+                Console.WriteLine("Confirmation msg after successfully saving the design name " + msg);
+                logger.Info("Confirmation msg after successfully saving the design name " + msg);
+
+
             }
             catch (Exception e)
             {
@@ -234,6 +237,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
                 throw e;
             }
         }
+
         //Negative Cases for Edit
         public static void CancelCreatedesign()
         {
@@ -244,21 +248,11 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             {
                 CreateDesignCancel.Click();
                 Wait.WaitTime(40);
-                //bool status_of_cancelpopup = CancelDesignPopup.IsElementDisplayed();
-                //Wait.WaitTime(10);
-                //Console.WriteLine("Status of Cancel Design Pop-up is " + status_of_cancelpopup);
-                //Wait.WaitTime(10);
-                //logger.Info("Status of Cancel Design Pop-up is " + status_of_cancelpopup);
-                //Wait.WaitTime(10);
-                //string msg_on_popup = CancelDesignPopup.GetText();
-                //Console.WriteLine("Message on Cancel Design Pop-up is " + msg_on_popup);
-                //logger.Info("Message on Cancel Design Pop-up is " + msg_on_popup);
-                //Wait.WaitTime(5);
                 CancelDesignPopupOk.Click();
                 Wait.WaitTime(5);
                 if (MyProject.IsElementDisplayed())
                 {
-                    Console.Write("Successfully navigate to Projets page.");
+                    Console.Write("Successfully navigate to " + Driver.Title + " page ");
                 }
                 else
                 {
@@ -284,7 +278,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             test = Base.extent.CreateTest("CancelSaveDesignName");
             try
             {
-                if(SaveDesign.IsElementEnabled())
+                if (SaveDesign.IsElementEnabled())
                 {
                     SaveDesign.Click();
                     bool status_of_save_button = SaveDesignNameYes.IsElementEnabled();
@@ -320,6 +314,55 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
                 throw e;
             }
 
+        }
+
+        //Checking Visiblity of SaveDesign and ViewProof button.
+        public static void VerifySaveDesignViewProof()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(CreateDesignPage));
+            test = Base.extent.CreateTest("VerifySaveDesignViewProof");
+            try
+            {
+                bool status_viewproof_before = ViewProof.IsElementDisplayed();
+                Console.WriteLine("Status of view proof before cliking on Preview changes " + status_viewproof_before);
+                Wait.WaitVisible(PreviewChanges, 30);
+                VerifyPreviewChanges();
+                Wait.WaitTime(30);
+                bool status_viewproof_after = ViewProof.IsElementDisplayed();
+                Console.WriteLine("Status of view proof after cliking on Preview changes " + status_viewproof_after);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Verify SaveDesign ViewProof failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Verify Alert Msg for Existing Design
+        public static void VerifyExistingDesignAlertMsg()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(CreateDesignPage));
+            test = Base.extent.CreateTest("VerifyExistingDesignAlertMsg");
+            try
+            {
+                SaveDesign.Click();
+                Wait.WaitVisible(SaveDeisgnPopup, 30);
+                Wait.WaitTime(30);
+                SaveDesignName.Type("suresh");
+                string alert_msg = ExistingDesignNameMsg.GetText();
+                Console.WriteLine("For existing design alert msg is " + alert_msg);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Verify Existing Design Alert Msg failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
         }
     }
 }

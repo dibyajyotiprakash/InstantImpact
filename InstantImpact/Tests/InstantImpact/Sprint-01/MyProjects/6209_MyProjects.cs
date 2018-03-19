@@ -29,10 +29,15 @@ namespace InstantImpact.Tests.InstantImpact.MyProjects
                 Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
-                MyProjectsPage.VerifyHomePage();
-                MyProjectsPage.VerifyTotalTempalteInaPage();
+                MyProjectsPage.VerifyProjectsPage();
                 Wait.WaitTime(5);
                 MyProjectsPage.VerifyColorOfRow();
+                Wait.WaitTime(10);
+                MyProjectsPage.VerifyListOfTemplates();
+                Wait.WaitTime(10);
+                MyProjectsPage.FilterByDeisgnName();
+                Wait.WaitTime(10);
+                MyProjectsPage.VerifySortByDesignName();
             }
             catch(Exception e)
             {

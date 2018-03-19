@@ -20,7 +20,6 @@ namespace InstantImpact.Tests.InstantImpact
          [TestCategory("IP_Sprint1")]
          public void SingleDelete()
         {
-            //
             try
             {
             test = Base.extent.CreateTest("_6198_Delete");
@@ -38,7 +37,6 @@ namespace InstantImpact.Tests.InstantImpact
             {
                 test.Fail(" _6198_Delete failed"+e);
             }
-
         }
     }
 }
