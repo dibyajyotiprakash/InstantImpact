@@ -226,12 +226,32 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
             try
             {
                 NextStep.Click();
-                test.Pass("Click on next passed.");
+                test.Pass("Click on next step passed.");
             }
             catch (Exception e)
             {
                 logger.Error("Cancel Design name pop-up failed due to : " + e);
                 test.Fail("Cancel Design name pop-up failed");
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on Cancel in Create Deisgn page
+        public static void ClickOnCancel()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(CreateDesignPage));
+            test = Base.extent.CreateTest("CancelCreatedesign");
+            try
+            {
+                CreateDesignCancel.Click();
+                test.Pass("Click on Cancel passed.");
+            }
+            catch (Exception e)
+            {
+                Console.Write("Click On Cancel failed.");
                 //**Closing browser
                 Driver.Quit();
                 throw e;

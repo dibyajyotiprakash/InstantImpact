@@ -219,6 +219,7 @@
     <Compile Include="PageObject\UI\InstantImpact\Delete_Preview\MyProjectsPage.cs" />
     <Compile Include="PageObject\UI\InstantImpact\Edit_Save\CreateDesignPage.cs" />
     <Compile Include="PageObject\UI\InstantImpact\Edit_Save\SelectProductDetailsPage.cs" />
+    <Compile Include="PageObject\UI\InstantImpact\Gmail\LoginGmailPage.cs" />
     <Compile Include="StartUp\AdminURLS.cs" />
     <Compile Include="StartUp\Atlas.cs" />
     <Compile Include="StartUp\Base.cs" />
@@ -237,6 +238,15 @@
     <Compile Include="Tests\InstantImpact\Sprint-01\Preview\6280_Preview.cs" />
     <Compile Include="Tests\InstantImpact\Sprint-01\Save\6203_Save.cs" />
     <Compile Include="Tests\InstantImpact\Sprint-01\Save\6703_SaveNegativeCases.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Add To Kart\6825_AddToCart.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6823_SaveDesignFromPos.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6821_OverrideSaveDesign .cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6822_SaveNewDesignName.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6824_Prompt_SaveDesign.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6827_NegativeCasesNextStep.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6828_CancelFromCreateDeisgnPage.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6829_NegativeCasesCancel.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Share Extrenally\6826_ShareSaveDesignFromWorkCenter.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
