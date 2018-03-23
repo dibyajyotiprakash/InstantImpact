@@ -47,7 +47,6 @@ namespace BrandmuscleAutomation.Interactions
             Base.Driver.FindElement(by).SendKeys(Keys.Control + "a");
             Base.Driver.FindElement(by).SendKeys(value);
         }
-
         internal static void CopyData(this By by)
         {
             Base.Driver.FindElement(by).SendKeys(Keys.Control + "a");
