@@ -23,22 +23,19 @@ namespace InstantImpact.Tests.InstantImpact.Save
         {
             try
             {
-                test = Base.extent.CreateTest("_6703_SaveNegativeCases");
+                test = extent.CreateTest("_6703_SaveNegativeCases");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
-                Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com","go2web");
                 HomePage.VerifyHomePage();
                 MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.ClickOnEdit();
                 CreateDesignPage.VerifyCreateDesignPage();
                 CreateDesignPage.VerifyPreviewChanges();
-                CreateDesignPage.ClickOnPreviewChange();
-                Wait.WaitTime(40);
-                CreateDesignPage.CancelSaveDesignName("template");
-                Wait.WaitTime(20);
-                CreateDesignPage.VerifyExistingDesignAlertMsg();                
+                CreateDesignPage.VerifyPreviewChanges();
+                CreateDesignPage.CancelSaveDesignName("template");                
                 test.Pass("_6703_SaveNegativeCases passed");
+                Driver.Quit();
             }
             catch(Exception e)
             {

@@ -7,36 +7,43 @@ using log4net;
 using AventStack.ExtentReports;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace InstantImpact.PageObject.UI.InstantImpact.EditButton
+namespace InstantImpact.PageObject.UI.InstantImpact.Edit_Save
 {
     class SelectProductDetailsPage : Base
     {
         public static ExtentTest test;
         public static By SelectProductDetailsHeader
-        {get { return (By.XPath("//h1[contains(text(),'Select Product Details')]")); } }
+        {get { return (By.XPath("//*[text()='Select Product Details'][1]")); } }
 
         public static By Cancel
         { get { return (By.Id("Body_lnkBtnCancel")); } }
 
         public static By Frame
-        { get { return (By.XPath("//*[contains(@id,'confirm1520')]")); } }
+        { get { return (By.XPath("//*[@class='rwWindowContent']")); } }
 
         public static By FrameYes
-        { get { return (By.XPath("//*[@class='btn GenericRedButton'][3]")); } }
+        { get { return (By.XPath("//*[@class='boxes']/a[1]")); } }
 
         public static By SearchHeader
         { get { return (By.Id("Body_lblSearchHeader"));} }
 
-        public static void VerifySelectDetailsPage()
+        public static By Back
+        { get { return (By.XPath("//*[@id='Body_lnkBtnCancel']")); } }
+
+        public static By Yes
+        { get { return (By.XPath("//*[@class='boxes']/a[1]")); } }
+        
+
+        public static void VerifySelectProductDetailsPage()
         {
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(SelectProductDetailsPage));
-            test = extent.CreateTest("VerifySelectDetailsPage");
             try
             {
-                Wait.WaitVisible(SelectProductDetailsHeader, 30);
+                Wait.WaitForPageToLoad();
+                Wait.WaitVisible(SelectProductDetailsHeader,30);
                 bool status = SelectProductDetailsHeader.IsElementDisplayed();
-                Console.WriteLine("Status of Produvt Deatils Header is " + status);
+                Console.WriteLine("Status of Product Deatils Header is " + status);
                 logger.Info("Status of Product Deatils Header is ." + status);
             }
             catch(Exception e)
@@ -53,20 +60,54 @@ namespace InstantImpact.PageObject.UI.InstantImpact.EditButton
         {
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(SelectProductDetailsPage));
-            test = extent.CreateTest("CancelSelectProductDetails");
             try
             {
                 Cancel.Click();
-                Switches.SwitchToIFrame(Frame);
+                Wait.WaitVisible(FrameYes, 10);
                 FrameYes.Click();
-                Wait.WaitVisible(SearchHeader, 30);
-                String actual_title = Driver.Title;
-                Assert.IsTrue(actual_title.Contains("Item Search"), actual_title + "Error msg -After clicking on Cancel Item Search page is not comming");
             }
             catch(Exception e)
             {
                 logger.Error("Cancel Select Product Details failed due to : " + e);
                 test.Fail("Cancel Select Product Details failed.");
+                //**Closing browser
+                Driver.Quit();
+            }
+        }
+
+        //Click on Back
+        public static void ClickOnBack()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(SelectProductDetailsPage));
+            try
+            {
+                Wait.WaitVisible(Back);
+                Back.Click();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on back failed due to : " + e);
+                test.Fail("Click on back failed.");
+                //**Closing browser
+                Driver.Quit();
+            }
+        }
+
+        //Click on Yes From Back
+        public static void ClickYesFromBack()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(SelectProductDetailsPage));
+            try
+            {
+                Wait.WaitVisible(Yes);
+                Yes.Click();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on yes from back failed due to : " + e);
+                test.Fail("Click on yes from back failed.");
                 //**Closing browser
                 Driver.Quit();
             }

@@ -57,7 +57,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         { get { return (By.XPath("//*[@class='TdDesignName']")); } }
 
         public static By FirstPreview
-        { get { return (By.Id("ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkImage")); } }
+        { get { return (By.XPath("//*[@id='ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkPreviewImageEnabled']")); } }
 
         public static By FirstTemplateRow
         { get { return (By.XPath("//tbody/tr[1]/td[1]")); } }
@@ -65,14 +65,17 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         public static By FirstCheckBox
         { get { return (By.XPath("//tbody/tr[1]/td[1]")); } }
 
+        public static By FirstRow
+        { get { return (By.XPath("//tbody/tr[1]/td[1]")); } }
+
         public static By SelectAllCheckBox
         { get { return (By.XPath("//thead/tr/th[1]")); } }
 
         public static By FirstDelete
-        { get { return (By.XPath("//tbody/tr[1]/td[9]/div[3]/a[1]")); } }
+        { get { return (By.XPath("//*[@id='ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkDeleteDesignEnabled']")); } }
 
         public static By DeleteAlertPopup
-        { get { return (By.XPath("//*[contains(@id,'confirm1521')]")); } }
+        { get { return (By.XPath("//*[contains(@id,'confirm1522')]")); } }
 
         public static By DeleteAlertPopupMsg
         { get { return (By.XPath("//*[contains(text(),'Are you sure you want to delete')]")); } }
@@ -93,13 +96,40 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         { get { return (By.XPath("//tbody/tr/td[1]")); } }
 
         public static By FirstEdit
-        { get { return (By.XPath("//tbody/tr[1]/td[9]/div[2]/a[1]")); } }
+        { get { return (By.XPath("//*[@id='ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkEdit']")); } }
 
         public static By ImageCoulmn
         { get { return (By.XPath("//*[@class='rgHeader'][1]")); } }
 
         public static By TemplateIdColumn
         { get { return (By.XPath("//*[@class='rgHeader'][5]")); } }
+
+        public static By AddToKart
+        { get { return (By.XPath("//*[@id='ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkAddToCart']"));} }
+
+        public static By YesAlertPopup
+        { get { return (By.XPath("//*[@class='btn GenericRedButton'][1]")); } }
+
+        public static By Share
+        { get { return (By.XPath("//*[@id='ctl00_Body_RadGridTemplate_ctl00_ctl04_lnkShare']")); } }
+
+        public static By PosOnDemand
+        { get { return (By.XPath("//*[@class='MenuItems']/div/div/ul/li[2]")); } }
+
+        public static By FirstDesignname
+        { get { return (By.XPath("//tbody/tr[1]/td[5]")); } }
+
+        public static By BeforeTemplates
+        { get { return (By.XPath("//tbody/tr/td[5]")); } }
+
+        public static By TemplateId
+        { get { return (By.XPath("//tbody/tr[1]/td[6]")); } }
+
+        public static By AfterTemplates
+        { get { return (By.XPath("//*[@class='rgSorted']")); } }
+
+        public static By AddToCart
+        { get { return (By.XPath("//*[@class='cartImage']")); } }
 
         public static void VerifyProjectsPage()
         {
@@ -108,7 +138,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             try
             {
                 //Check the visiblity of My Project Header
-                Wait.WaitVisible(ProjectsHeader, 60);
+                Wait.WaitVisible(ProjectsHeader,60);
                 bool status_of_myprojectheader = ProjectsHeader.IsElementDisplayed();
                 Console.WriteLine("Status of logo is " + status_of_myprojectheader);
 
@@ -151,11 +181,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 {
                     Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                     Wait.WaitVisible(DeleteAlertPopupYes,10);
-                    Wait.WaitTime(10);
                     DeleteAlertPopupYes.Click();
                     Wait.WaitVisible(ConfirmationMsgPopup,10);
                     Console.WriteLine("Confirmation message is " + ConfirmationMsgPopup.GetText());
-                    Wait.WaitTime(10);
                 }
                 else
                 {
@@ -183,7 +211,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 SecondCheckBox.Click();
                 DeleteSelected.Click();
                 Wait.WaitVisible(DeleteAlertPopup, 10);
-                Wait.WaitTime(10);
                 if (DeleteAlertPopup.IsElementDisplayed())
                 {
                     Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
@@ -216,17 +243,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 SelectAllCheckBox.Click();
                 DeleteSelected.Click();
                 bool status_of_deletealertpopup = DeleteAlertPopup.IsElementDisplayed();
-                if (status_of_deletealertpopup)
-                {
-                    Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
-                    DeleteAlertPopupYes.Click();
-                }
-                else
-                {
-                    Console.Write("Delete alert pop-up is not comming ");
-                }
+                Assert.IsTrue(status_of_deletealertpopup);
+                Wait.WaitVisible(ConfirmationMsgPopup, 10);
                 Console.WriteLine("Confirmation message is " + ConfirmationMsgPopup.GetText());
-                Wait.WaitTime(10);
             }
             catch (Exception e)
             {
@@ -235,7 +254,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Driver.Quit();
                 throw e;
             }
-
         }
 
         //Click on Edit Button.
@@ -245,12 +263,13 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
             try
             {
+                Wait.WaitVisible(FirstCheckBox, 10);
                 FirstEdit.Click();
             }
             catch (Exception e)
             {
                 logger.Error("Click on edit failed due to : " + e);
-                //test.Fail("Click on edit failed.");
+                test.Fail("Click on edit failed.");
                 //**Closing browser
                 Driver.Quit();
                 throw e;
@@ -299,6 +318,27 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
         }
 
+        //Verify Template Id In Create Design Page
+        public static string VerifyTemplateId()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("VerifyTemplateId");
+            try
+            {
+                string template_id = TemplateId.GetText();
+                // Write the generic code to compare with other related pages(Create Design nad Shopping cart)
+                return template_id;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Verify Retired Template failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
         //Click on DeleteSelected without Clicking on Checkbox
         public static void ClickDeleteSelectWithoutCheck()
         {
@@ -308,10 +348,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             try
             {
                 DeleteSelected.Click();
-                Wait.WaitVisible(WithoutSelectDeleteAlert, 20);
+                Wait.WaitVisible(WithoutSelectDeleteAlert,20);
                 string msg=WithoutSelectDeleteAlert.GetText();
                 Console.WriteLine("Message after click on DeleteSelected without selcting check box is " + msg);
-                Wait.WaitTime(10);
             }
             catch(Exception e)
             {
@@ -336,16 +375,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Wait.WaitVisible(DeleteAlertPopup, 10);
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
-                Wait.WaitTime(10);
-                if (ProjectsHeader.IsElementDisplayed())
-                {
-                    Console.Write("Delete alert popup is successfully dismissed.");
-                }
-                else
-                {
-                    Console.Write("Delete alert popup is not successfully dismissed.");
-                }
-                Wait.WaitTime(5);
+                Assert.IsTrue(ProjectsHeader.IsElementDisplayed());
             }
             catch (Exception e)
             {
@@ -369,17 +399,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Wait.WaitVisible(DeleteAlertPopup, 10);
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
-                Wait.WaitTime(10);
-                if (ProjectsHeader.IsElementDisplayed())
-                {
-                    Console.Write("Delete alert popup is successfully dismissed.");
-                }
-                else
-                {
-                    Console.Write("Delete alert popup is not successfully dismissed.");
-                }
-                Wait.WaitTime(5);
-
+                Assert.IsTrue(ProjectsHeader.IsElementDisplayed());
             }
             catch (Exception e)
             {
@@ -398,49 +418,15 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             {
                 SelectAllCheckBox.Click();
                 DeleteSelected.Click();
-                Wait.WaitVisible(DeleteAlertPopup, 10);
+                Wait.WaitVisible(DeleteAlertPopup,10);
                 Console.Write("Message from the Delete alert popup is " + DeleteAlertPopupMsg.GetText());
                 DeleteAlertPopupNo.Click();
-                Wait.WaitTime(10);
-                if (ProjectsHeader.IsElementDisplayed())
-                {
-                    Console.Write("Delete alert popup is successfully dismissed.");
-                }
-                else
-                {
-                    Console.Write("Delete alert popup is not successfully dismissed.");
-                }
-                Wait.WaitTime(5);
+                Assert.IsTrue(ProjectsHeader.IsElementDisplayed());
             }
             catch (Exception e)
             {
                 logger.Error("Dismiss PopupAll Template failed due to : " + e);
                 //**Closing browser
-                Driver.Quit();
-                throw e;
-            }
-        }
-
-        //Verify Color of each row in Projects
-        public static void VerifyColorOfRow()
-        {
-            log4net.Config.XmlConfigurator.Configure();
-            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
-            test = Base.extent.CreateTest("GetColorOfRow");
-            try
-            {
-                String rowcolor_before = Driver.FindElement(By.XPath("//tbody/tr[1]/td[1]")).GetCssValue("background-color");
-                Console.WriteLine("Color of row before selecting any template is " + rowcolor_before);
-                FirstCheckBox.Click();
-                Wait.WaitTime(5);
-                String rowcolor_after = Driver.FindElement(By.XPath("//tbody/tr[1]/td[1]")).GetCssValue("background-color");
-                Console.WriteLine("Color of row after selecting any template is " + rowcolor_after);
-                FirstCheckBox.Click();
-
-            }
-            catch (Exception e)
-            {
-                test.Fail("Get color of row failed" + e);
                 Driver.Quit();
                 throw e;
             }
@@ -454,7 +440,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             test = Base.extent.CreateTest("VerifyListOfTemplates");
             try
             {
-                IList<IWebElement> templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                IList<IWebElement> templates = Element.getElements(BeforeTemplates);
                 Console.WriteLine("Number of templates present in a page is " + templates.Count);
                 for (int i = 0; i < templates.Count; i++)
                 {
@@ -477,14 +463,13 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             test = Base.extent.CreateTest("VerifyListOfTemplates");
             try
             {
-                IList<IWebElement> templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                IList<IWebElement> templates = Element.getElements(BeforeTemplates);
                 Console.WriteLine("Number of templates present in a page is " + templates.Count());
                 for (int i = 0; i < templates.Count; i++)
                 {
                     SearchBox.Type(templates[i].Text);
-                    Wait.WaitTime(5);
+                    Wait.WaitVisible(SearchButton);
                     SearchButton.Click();
-                    Wait.WaitTime(5);
                     SearchBox.Type(Keys.Control + "a");
                     SearchBox.Type(Keys.Clear);
                     MyProject.Click();
@@ -502,6 +487,28 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             }
         }
 
+        //Get The Existing design name
+        public static string GetExistingName()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("GetExistingName");
+            try
+            {
+                Wait.WaitVisible(FirstDesignname,10);
+                string before_template = FirstDesignname.GetText();
+                Console.WriteLine("Temaplate Design name is " + before_template);
+                return before_template;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Get Existing Name failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
         //Verify Sorting By Design name
         public static void VerifySortByDesignName()
         {
@@ -511,17 +518,16 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             try
             {
                 //Before click on Sort by Design name
-                IList<IWebElement> before_templates = Driver.FindElements(By.XPath("//tbody/tr/td[5]"));
+                IList<IWebElement> before_templates = Element.getElements(BeforeTemplates);
                 Console.WriteLine("Design names before sorting..");
                 foreach(IWebElement beforeclick in before_templates)
                 {
                     Console.WriteLine(beforeclick.Text);
                 }
                 SortByDesignName.Click();
-                Wait.WaitTime(20);
                 //After click on Sort by Design name
                 Console.WriteLine("Design names after sorting..");
-                IList<IWebElement> after_templates = Driver.FindElements(By.XPath("//*[@class='rgSorted']"));
+                IList<IWebElement> after_templates = Element.getElements((AfterTemplates));
                 foreach (IWebElement afterclick in after_templates)
                 {
                     Console.WriteLine(afterclick.Text);
@@ -530,6 +536,100 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             catch (Exception e)
             {
                 test.Fail("Verify List of Verify Soft by deisgn name failed" + e);
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Share Templates
+        public static void ClickOnShare()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            test = Base.extent.CreateTest("Click on Share");
+            try
+            {
+                Wait.WaitVisible(Share);
+                Share.Click();
+            }
+            catch(Exception e)
+            {
+                test.Fail("Share Template failed" + e);
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on Add to Kart
+        public static void ClickOnAddtoKart()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+                AddToKart.Click();
+                YesAlertPopup.Click();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on add to kart failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on POS On Demand Button
+        public static void ClickOnPosOnDemand()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+                Wait.WaitVisible(PosOnDemand,10);
+                PosOnDemand.Click(); 
+            }
+            catch (Exception e)
+            {
+                logger.Error("ClickOnPosOnDemand failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on Shopping Cart
+        public static void ClickOnShoppingCart()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+                Wait.WaitVisible(AddToCart);
+                AddToCart.Click();
+            }
+            catch (Exception e)
+            {
+                test.Fail("Share Template failed" + e);
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Verify for Unavailable and Click on Edit Button.
+        public static void VerifyAndClickOnEdit()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+               
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on edit failed due to : " + e);
+                test.Fail("Click on edit failed.");
+                //**Closing browser
                 Driver.Quit();
                 throw e;
             }

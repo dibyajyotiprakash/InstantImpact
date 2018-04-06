@@ -23,14 +23,14 @@ namespace InstantImpact.Tests.InstantImpact.Preview
         {
             try
             {
-                test = Base.extent.CreateTest("_6280_Preview");
+                test = extent.CreateTest("_6280_Preview");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
-                Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
                 MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.ClickOnPreview();
+                Driver.Quit();
             }
             catch (Exception e)
             {

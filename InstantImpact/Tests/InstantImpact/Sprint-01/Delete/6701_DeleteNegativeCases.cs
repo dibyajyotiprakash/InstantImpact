@@ -22,12 +22,11 @@ namespace InstantImpact.Tests.InstantImpact.Delete
         {
             try
             {
-                test = Base.extent.CreateTest("_6701_DeleteNegativeCases");
+                test = extent.CreateTest("_6701_DeleteNegativeCases");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
-                MyProjectsPage.ClickDeleteSelectWithoutCheck();
                 MyProjectsPage.DismissPopupSingleTemplate();
                 MyProjectsPage.DismissPopupMultipleTemplate();
                 MyProjectsPage.DismissPopupAllTemplate();

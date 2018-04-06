@@ -31,7 +31,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             {
                 //Verify Title of Login page
                 string actual_title = Driver.Title;
-                Assert.IsTrue(actual_title.Contains("Log in"), actual_title + "Error msg -Title does not contain Log in");
+                Assert.IsTrue(actual_title.Contains("Instant Impact"), actual_title + "Error msg -Title does not contain Log in");
 
                 //Verify Logo visibilty
                 Wait.WaitVisible(InstantImpactLogo, 60);

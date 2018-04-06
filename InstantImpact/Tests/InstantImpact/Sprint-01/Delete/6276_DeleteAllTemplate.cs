@@ -22,12 +22,10 @@ namespace InstantImpact.Tests.InstantImpact
         {
             try
             {
-                test = Base.extent.CreateTest("_6276_Delete");
+                test = extent.CreateTest("_6276_DeleteAllTemplate");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
-                Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
-                Wait.WaitTime(5);
                 HomePage.VerifyHomePage();
                 MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.DeleteAllTemplates();

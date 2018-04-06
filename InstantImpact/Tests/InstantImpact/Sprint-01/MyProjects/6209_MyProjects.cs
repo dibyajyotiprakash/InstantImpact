@@ -23,21 +23,16 @@ namespace InstantImpact.Tests.InstantImpact.MyProjects
         {
             try
             {
-                test = Base.extent.CreateTest("_6209_MyProjects");
+                test = extent.CreateTest("_6209_MyProjects");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
-                Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
                 MyProjectsPage.VerifyProjectsPage();
-                Wait.WaitTime(5);
-                MyProjectsPage.VerifyColorOfRow();
-                Wait.WaitTime(10);
                 MyProjectsPage.VerifyListOfTemplates();
-                Wait.WaitTime(10);
                 MyProjectsPage.FilterByDeisgnName();
-                Wait.WaitTime(10);
                 MyProjectsPage.VerifySortByDesignName();
+                Driver.Quit();
             }
             catch(Exception e)
             {

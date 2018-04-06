@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BrandmuscleAutomation.StartUp;
 using log4net;
 using OpenQA.Selenium;
 using AventStack.ExtentReports;
 using BrandmuscleAutomation.Interactions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InstantImpact.PageObject.UI.InstantImpact.Gmail
 {
@@ -25,7 +20,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Gmail
         { get { return (By.XPath("//*[@name='password']")); } }
 
         public static By MailBySender
-        { get { return (By.XPath("//*[@class='zA yO']/td[4]/div[2]/span[contains(text(),'brandmuscle')]")); } }
+        { get { return (By.XPath("//*[@class='yX xY ']/div[2]/span[text()='brandmuscle'][1]")); } }
 
         public static By Link
         { get { return (By.XPath("//*[text()='Click here to view the design']")); } }
@@ -33,18 +28,17 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Gmail
 
         //Login to Gmail
         public static void LoginToGmail(string un,string pwd)
-        {
-            test = Base.extent.CreateTest("LoginGmailPageMail");
+        {      
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(LoginGmailPageMail));
             try
             {
                 UserName.Type(un);
-                Wait.WaitTime(10);
+                Wait.WaitVisible(Next,10);
                 Next.Click();
-                Wait.WaitTime(10);
+                Wait.WaitVisible(Password, 10);
                 Password.Type(pwd);
-                Wait.WaitTime(10);
+                Wait.WaitVisible(Next, 10);
                 Next.Click();
             }
             catch (Exception e)
@@ -65,8 +59,8 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Gmail
             try
             {
                 Wait.WaitVisible(MailBySender,30);
+                Wait.WaitVisible(MailBySender,10);
                 MailBySender.Click();
-                Wait.WaitTime(10);
             }
             catch (Exception e)
             {

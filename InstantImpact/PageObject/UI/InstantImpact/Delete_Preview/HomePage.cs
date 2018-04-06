@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 using AventStack.ExtentReports;
 using BrandmuscleAutomation.StartUp;
 using BrandmuscleAutomation.Interactions;
-using Microsoft.VisualStudio.QualityTools.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
@@ -22,6 +21,9 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         public static By AccountsProjects
         { get { return (By.XPath("//*[@href='MyProjectsPage.aspx']")); } }
 
+        public static By Help
+        { get { return (By.XPath("//*[@class='MenuItems']/div/div/ul/li[6]")); } }
+
         public static void VerifyHomePage()
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -36,6 +38,7 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
                 Wait.WaitVisible(DiageoLogo,20);
                 bool status_of_logo = DiageoLogo.IsElementDisplayed();
                 Console.WriteLine("Status of logo is " + status_of_logo);
+                Assert.IsTrue(status_of_logo);
 
                 //Check Your Account Button
                 Wait.WaitVisible(YourAccount,20);
@@ -65,7 +68,6 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
         {
             log4net.Config.XmlConfigurator.Configure();
             ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
-            test = Base.extent.CreateTest("AccountsToProjects");
             try
             {
                 YourAccount.Click();
@@ -74,6 +76,44 @@ namespace InstantImpact.PageObject.UI.InstantImpact.Delete_Preview
             catch (Exception e)
             {
                 logger.Error("Navigate from acconts to projects failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on Help Button.
+        public static void ClickOnHelp()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+                Wait.WaitVisible(Help);
+                Help.Click();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on help failed due to : " + e);
+                //**Closing browser
+                Driver.Quit();
+                throw e;
+            }
+        }
+
+        //Click on Projects
+        public static void ClickOnProjects()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            ILog logger = LogManager.GetLogger(typeof(MyProjectsPage));
+            try
+            {
+                Wait.WaitVisible(MyProject);
+                MyProject.Click();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Click on Projects failed due to : " + e);
                 //**Closing browser
                 Driver.Quit();
                 throw e;

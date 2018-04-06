@@ -220,6 +220,10 @@
     <Compile Include="PageObject\UI\InstantImpact\Edit_Save\CreateDesignPage.cs" />
     <Compile Include="PageObject\UI\InstantImpact\Edit_Save\SelectProductDetailsPage.cs" />
     <Compile Include="PageObject\UI\InstantImpact\Gmail\LoginGmailPage.cs" />
+    <Compile Include="PageObject\UI\InstantImpact\Help\HelpPage.cs" />
+    <Compile Include="PageObject\UI\InstantImpact\OverwriteSavePrompt\POS_On_Demand.cs" />
+    <Compile Include="PageObject\UI\InstantImpact\Share\ShareTemplatePage.cs" />
+    <Compile Include="PageObject\UI\InstantImpact\Shopping_Cart\ShoppingCartPage.cs" />
     <Compile Include="StartUp\AdminURLS.cs" />
     <Compile Include="StartUp\Atlas.cs" />
     <Compile Include="StartUp\Base.cs" />
@@ -242,11 +246,16 @@
     <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6823_SaveDesignFromPos.cs" />
     <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6821_OverrideSaveDesign .cs" />
     <Compile Include="Tests\InstantImpact\Sprint-02\Override Save Design\6822_SaveNewDesignName.cs" />
-    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6824_Prompt_SaveDesign.cs" />
-    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6827_NegativeCasesNextStep.cs" />
-    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6828_CancelFromCreateDeisgnPage.cs" />
-    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To ave Design\6829_NegativeCasesCancel.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To Save Design\6824_Prompt_SaveDesign.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To Save Design\6827_NegativeCasesNextStep.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To Save Design\6828_CancelFromCreateDeisgnPage.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-02\Prompt To Save Design\6829_NegativeCasesCancel.cs" />
     <Compile Include="Tests\InstantImpact\Sprint-02\Share Extrenally\6826_ShareSaveDesignFromWorkCenter.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-03\Add Multiple Files To TariningGuides\7285_AddMultipleFiles.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-03\Remove From Kart\7247_RemoveOneItem.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-03\Remove From Kart\7248_RemoveAllItems.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-03\Return To Original Search Result\767- Return To Original Search Result.cs" />
+    <Compile Include="Tests\InstantImpact\Sprint-03\TemplateId Reflect on Realted Page\7250_TemplateId Should Reflect.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

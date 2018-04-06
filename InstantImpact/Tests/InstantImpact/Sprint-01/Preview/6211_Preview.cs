@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AventStack.ExtentReports;
 using BrandmuscleAutomation.Enum;
 using BrandmuscleAutomation.Interactions;
@@ -23,14 +19,14 @@ namespace InstantImpact.Tests.InstantImpact.Preview
         {
             try
             {
-                test = Base.extent.CreateTest("_6211_Preview");
+                test = extent.CreateTest("_6211_Preview");
                 OpenBrowser(Browser.Chrome);
                 Navigation.GoToURL("http://ii4.dev.brandmuscle.net/");
-                Wait.WaitTime(5);
                 LoginPage.LoginToApplication("diageoadmin@centiv.com", "go2web");
                 HomePage.VerifyHomePage();
                 MyProjectsPage.VerifyProjectsPage();
                 MyProjectsPage.ClickOnPreview();
+                Driver.Quit();
             }
             catch(Exception e)
             {

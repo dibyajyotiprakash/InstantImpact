@@ -25,8 +25,6 @@ namespace BrandmuscleAutomation.Interactions
             Wait.WaitTime(15);
             Base.Driver.Close();
             Base.Driver.SwitchTo().Window(Base.Driver.WindowHandles.First());
-
-
         }
         internal static string GetCurrentURL()
         {
